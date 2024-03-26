@@ -1,6 +1,13 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const {
+    getElementById,
+    getIndexById,
+    updateElement,
+    seedElements,
+    createElement
+} = require("./utils")
 
 const envolopes = ['']
 
@@ -32,8 +39,16 @@ app.post('/envolopes', (req,res, next) => {
         res.status(400).send()
         res.send('There has been an error! Please try again.')
     }
-    
-    
+})
+
+app.delete("/envolopes/:name", (req, res, next) => {
+    const nameIndex = getIndexById(req.params.name, envolopes)
+    if(nameIndex !== -1) {
+        envolopes.splice(nameIndex,1)
+        res.status(204).send(nameIndex)
+    } else {
+        res.status(404).send()
+    }
 })
 
 app.listen(port, () => {
