@@ -4,10 +4,13 @@ const port = 3000
 // const {getElementById, getIndexById, createElement} = require('/utils')
 app.use(express.static('public'))
 const envolopes = {
-    'dining out':
-    '300',
-    groceries:
-    400
+    diningOut: 300,
+    groceries: 400,
+    rent: 1600,
+    automotive: 375,
+    savings: 600,
+    projects: 475
+
 }
 
 
@@ -15,18 +18,18 @@ app.get('/', (req, res, next) => {
     res.send('Hello world!')
 })
 
-app.get('http://localhost:3000/envolopes', (req, res, next) => {
+app.get('/envolopes', (req, res, next) => {
     res.send(envolopes)
     
 })
 
-app.get('http://localhost:3000/envolopes/:name', (req, res, next) => {
-    const person = getElementById(req.param.name,envolopes)
+app.get('/envolopes/:name', (req, res, next) => {
+    const name = getElementById(req.param.name,envolopes)
     res.send(person)
 })
 
-app.post('http://localhost:3000/envolopes', (req,res, next) => {
-    const newPerson = createElement('envolopes', req.query)
+app.post('/envolopes', (req,res, next) => {
+    const newPerson = push('envolopes', req.query)
     if (newPerson) {
         envolopes.push(newPerson)
         res.status(201).send(newPerson)
@@ -37,10 +40,10 @@ app.post('http://localhost:3000/envolopes', (req,res, next) => {
     }
 })
 //transfering between envolopes
-app.post('http://localhost:3000/envolopes/transfer/:from/:to', (req ,res, next) => {
-    const fromEnvolope = req.params.name, envolopes
-    const toEnvolope = req.params.name, envolopes
-    cons moneyEx = ''
+app.post('/envolopes/transfer/:from/:to', (req ,res, next) => {
+    const fromEnvolope = req.params.name
+    const toEnvolope = req.params.name
+    const moneyEx = ''
     if (fromEnvolope == toEnvolope){
         res.send('Can not be same Envolope')
     } else {
@@ -49,7 +52,7 @@ app.post('http://localhost:3000/envolopes/transfer/:from/:to', (req ,res, next) 
     }
 })
 
-app.put('http://localhost:3000/envolopes',(req, res, next) => {
+app.put('/envolopes',(req, res, next) => {
     const envolopeUpdates = getIndexById(req.params.id,envolopes)
     if(envolopeUpdates !== -1){
         updateElement(req.params.name, req.query, envolopes)
@@ -59,7 +62,7 @@ app.put('http://localhost:3000/envolopes',(req, res, next) => {
     }
 })
 
-app.delete("http://localhost:3000/envolopes/:name", (req, res, next) => {
+app.delete("/envolopes/:name", (req, res, next) => {
     const nameIndex = getIndexById(req.params.name, envolopes)
     if(nameIndex !== -1) {
         envolopes.splice(nameIndex,1)
