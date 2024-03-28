@@ -2,15 +2,13 @@ const express = require('express')
 const app = express()
 const port = 3000
 // const {getElementById, getIndexById, createElement} = require('/utils')
+app.use(express.static('public'))
 const envolopes = {
     'dining out':
-    300,
+    '300',
     groceries:
     400
 }
-
-app.use(express.static('public'))
-
 
 
 app.get('/', (req, res, next) => {
@@ -40,13 +38,21 @@ app.post('http://localhost:3000/envolopes', (req,res, next) => {
 })
 //transfering between envolopes
 app.post('http://localhost:3000/envolopes/transfer/:from/:to', (req ,res, next) => {
-
+    const fromEnvolope = req.params.name, envolopes
+    const toEnvolope = req.params.name, envolopes
+    cons moneyEx = ''
+    if (fromEnvolope == toEnvolope){
+        res.send('Can not be same Envolope')
+    } else {
+        fromEnvolope - moneyEx
+        toEnvolope + moneyEx
+    }
 })
 
 app.put('http://localhost:3000/envolopes',(req, res, next) => {
     const envolopeUpdates = getIndexById(req.params.id,envolopes)
     if(envolopeUpdates !== -1){
-        updateElement(req.params.id, req.query, envolopes)
+        updateElement(req.params.name, req.query, envolopes)
         res.send(envolopes(envolopeUpdates))    
     } else {
         res.status('404').send()
