@@ -23,8 +23,8 @@ app.get('/envolopes', (req, res, next) => {
     
 })
 
-app.get('/envolopes/:name', (req, res, next) => {
-    const name = getElementById(req.param.name,envolopes)
+app.get('/envolopes/:id', (req, res, next) => {
+    const name = getElementById(req.param.id,envolopes)
     res.send(person)
 })
 
@@ -62,7 +62,7 @@ app.put('/envolopes',(req, res, next) => {
     }
 })
 
-app.delete("/envolopes/:name", (req, res, next) => {
+app.delete("/envolopes/:id", (req, res, next) => {
     const nameIndex = getIndexById(req.params.name, envolopes)
     if(nameIndex !== -1) {
         envolopes.splice(nameIndex,1)
