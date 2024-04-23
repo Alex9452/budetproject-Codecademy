@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 5432
- {getElementById, getIndexById, createElement} = require('/utils')
+ //{getElementById, getIndexById, createElement} = require('/utils')
 app.use(express.static('public'))
 
 
